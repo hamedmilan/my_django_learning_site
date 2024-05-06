@@ -1,0 +1,59 @@
+{% load static %}
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'alert-danger' %}
+            <!-- Error Modal -->
+            <div id="failure_tic" class="modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Error</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>{{ message }}</p> <!-- Display error message -->
+                        </div>
+                        <div style="text-align:center;">
+                            <!-- Circular container for error icon -->
+                            <div class="rounded-circle error_circle" style="display: inline-block;">
+                                <!-- SVG icon for error -->
+                                <img src="{% static 'img/exclamation-triangle.svg' %}" alt="Error Icon" class="error_symbol" style="width: 100px; height: 100px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        
+        {% if message.tags == 'alert-success' %}
+            <!-- Success Modal -->
+            <div id="success_tic" class="modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Success</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>{{ message }}</p> <!-- Display success message -->
+                        </div>
+                        <div style="text-align:center;">
+                            <!-- Circular container for success icon -->
+                            <h1 style="text-align:center;">
+                                <div class="checkmark-circle">
+                                    <div class="background"></div>
+                                    <div class="checkmark draw"></div>
+                                </div>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
