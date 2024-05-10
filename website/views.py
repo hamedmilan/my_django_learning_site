@@ -13,15 +13,14 @@ def about_view(request):
 
 def contact_view(request):
     if request.method == 'POST':
-        form = ContactForm(request.POST)
+        # creating a copy of the POST data
+        dummy_form = request.POST
+        copy_dummy_form = dummy_form.copy()
+        # modifying the value of the 'name' field in the copied data
+        copy_dummy_form['name'] = 'unknown'
+        # re-initializing the form with the modified data
+        form = ContactForm(copy_dummy_form)
         if form.is_valid():
-            # creating a copy of the POST data
-            dummy_form = request.POST
-            copy_dummy_form = dummy_form.copy()
-            # modifying the value of the 'name' field in the copied data
-            copy_dummy_form['name'] = 'unknown'
-            # re-initializing the form with the modified data
-            form = ContactForm(copy_dummy_form)
             # saving the data to the database
             form.save()
             messages.add_message(request, messages.SUCCESS, 'Your ticket has been submitted successfully!')
