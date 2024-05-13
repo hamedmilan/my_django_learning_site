@@ -1,9 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from blog.models import Post, Comment
 from django.utils import timezone
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from blog.forms import CommenttForm
 from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+ 
 
 def blog_view(request, **kwargs):
     posts = Post.objects.filter(status = True)
@@ -63,16 +66,20 @@ def single_view(request, pid):
     else:
         previous_post = 0
         
-
-    comments = Comment.objects.filter(post=the_post.id, approved=True)
-
-    form = CommenttForm()
-
-    context = {'post': the_post, 'next_post': next_post, 'previous_post': previous_post, 'comments': comments, 'form': form}
-
     
+    if not the_post.login_required:
 
-    return render(request, 'blog/blog-single.html',context)
+        comments = Comment.objects.filter(post=the_post.id, approved=True)
+
+        form = CommenttForm()
+
+        context = {'post': the_post, 'next_post': next_post, 'previous_post': previous_post, 'comments': comments, 'form': form}
+
+        return render(request, 'blog/blog-single.html',context)
+    else:
+        return HttpResponseRedirect(reverse('accounts:login'))
+
+
 
 
 def blog_search(request):

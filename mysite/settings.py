@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'taggit',
     'django_summernote',
     'website.apps.WebsiteConfig',
-    'blog'
+    'blog',
+    'accounts',
 
 ]
 
