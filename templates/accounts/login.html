@@ -24,36 +24,18 @@
 
     {% pass_change_message messages False %}
 
+    <div class="text-center">
+        <div class="container login-container">
 
-    <div class="container login-container">
-        <div class="row">
-            <div class="col-md-6 login-form-1">
-                <h3>Login with username</h3>
+            <div class="col-md-6 login-form-2 mx-auto">
+                <h3>Login</h3>
                 <form class="form-signin" method="post" action="{% url 'accounts:login' %}">
                     {% csrf_token %}
                     <div class="form-group">
-                        <input type="text" name="username" class="form-control" placeholder="Your Username *" required autofocus/>
+                        <input type="username" name="username" class="form-control" placeholder="Username or Email *" required autofocus />
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password" class="form-control" placeholder="Your Password *" required autofocus/>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="btnSubmit" value="Login" />
-                    </div>
-                    <div class="form-group">
-                        <a href="{% url 'accounts:forgotpassword' %}" class="ForgetPwd">Forget Password?</a>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-6 login-form-2">
-                <h3>Login with email</h3>
-                <form class="form-signin" method="post" action="{% url 'accounts:login' %}">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <input type="email" name="username" class="form-control" placeholder="Your Email *" required autofocus/>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" name="password" class="form-control" placeholder="Your Password *" required autofocus/>
+                        <input type="password" name="password" class="form-control" placeholder="Password *" required autofocus />
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btnSubmit" value="Login" />
@@ -64,6 +46,8 @@
                     </div>
                 </form>
             </div>
+
+
         </div>
     </div>
 
@@ -82,14 +66,14 @@
     <script src="{% static 'js/main.js' %}"></script>
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             // Trigger the modal
             $('#success_tic').modal('show');
         });
     </script>
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             // Trigger the modal
             $('#failure_tic').modal('show');
         });

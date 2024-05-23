@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib.auth.models import User
-from accounts.forms import AuthenticationFormWithEmail, forgotpasswordForm, resetpasswordForm
+from accounts.forms import MyAuthenticationForm, forgotpasswordForm, resetpasswordForm, MyUserCreationForm
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.conf import settings
 from django.core.mail import send_mail
@@ -19,35 +18,30 @@ from django.contrib import messages
 def login_view(request):
     if not request.user.is_authenticated:
         if request.method == 'POST':
-            # create instances of the authentication forms
-            form1 = AuthenticationForm(request=request, data=request.POST)
-            form2 = AuthenticationFormWithEmail(request=request, data=request.POST)
-            # check if form1 (standard authentication form) is valid
-            if form1.is_valid():
-                username = form1.cleaned_data.get('username')
-                password = form1.cleaned_data.get('password')
+            form = MyAuthenticationForm(request=request, data=request.POST)
+
+            if form.is_valid():
+                username = form.cleaned_data.get('username')
+                password = form.cleaned_data.get('password')
                 # authenticate the user using the extracted username and password
                 user = authenticate(request, username=username, password=password)
                 if user is not None:
                     login(request, user)
                     return redirect('/')
-
-            # check if form2 (email-based authentication form) is valid                    
-            if form2.is_valid():
-                username = form2.cleaned_data.get('username') # this is email!
-                password = form2.cleaned_data.get('password')
-                # authenticate the user using the extracted username (email) and password
-                user = authenticate(request, username=username, password=password)
-                if user is not None:
-                    login(request, user)
-                    return redirect('/')
+                else:
+                    username = form.cleaned_data.get('username') # this is email!
+                    password = form.cleaned_data.get('password')
+                    # authenticate the user using the extracted username (email) and password
+                    user = authenticate(request, username=username, password=password)
+                    if user is not None:
+                        login(request, user)
+                        return redirect('/')
                 
             messages.add_message(request, messages.ERROR, 'Username or password is wrong.')
 
         # if the request method is not POST
-        form1 = AuthenticationForm()
-        form2 = AuthenticationFormWithEmail()
-        context = {'form1': form1, 'form2': form2}
+        form = MyAuthenticationForm()
+        context = {'form': form}
         return render(request, 'accounts/login.html', context)
     
     else:
@@ -64,13 +58,16 @@ def logout_view(request):
 def signup_view(request):
     if not request.user.is_authenticated:
         if request.method == 'POST':
-            form = UserCreationForm(request.POST)
+            form = MyUserCreationForm(request.POST)
             if form.is_valid():
                 form.save()
+                messages.success(request, 'Signup successful!')
                 return redirect('/')
+            else:
+                messages.add_message(request, messages.ERROR, 'Sign up did not succeed!\n* username/email is taken\n* Password mismatch\n* Email is not correct')
+    
 
-
-        form = UserCreationForm()
+        form = MyUserCreationForm()
         context = {'form': form}
         return render(request, 'accounts/signup.html', context)
     else:

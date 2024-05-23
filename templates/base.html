@@ -1,4 +1,5 @@
 {% load static %}
+{% load accounts_tags %}
 
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
@@ -79,6 +80,7 @@
         </div>
     </header><!-- #header -->
 
+    {% pass_change_message messages False %}
     {% include 'messages.html' %}
 
     {% block content %}

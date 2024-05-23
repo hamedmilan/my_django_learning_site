@@ -15,7 +15,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>{{ message }} {% if login_link_flag %} Wanna go back to login? <a href="{% url 'accounts:login' %}">here</a>{% endif %}</p>
+                <p class="text-left">{{ message|linebreaksbr }} {% if login_link_flag %} Wanna go back to login? <a href="{% url 'accounts:login' %}">here</a>{% endif %}</p>
                 <!-- Display error message -->
             </div>
             <div style="text-align:center;">

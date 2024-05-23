@@ -11,13 +11,11 @@ django-summernote
 django-simple-captcha==0.5.20
 bleach
 django-ranged-response
-six
 typing_extensions
 webencodings
 django-multi-captcha-admin
 python-http-client
-sendgrid
-sendgrid-django
+
 
 
 
