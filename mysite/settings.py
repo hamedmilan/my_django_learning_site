@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'taggit',
     'django_summernote',
     'website.apps.WebsiteConfig',
+
     'blog',
     'accounts',
 
@@ -210,3 +211,15 @@ MESSAGE_TAGS = {
         messages.WARNING: 'alert-warning',
         messages.ERROR: 'alert-danger',
 }
+
+AUTHENTICATION_BACKENDS = ['accounts.backends.custom_backend.EmailOrUsernameModelBackend',]
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'hamed.milanchian@gmail.com'
+EMAIL_HOST_PASSWORD = 'bkjv nmre wuig guhb '
+EMAIL_USE_TLS = True
+#EMAIL_USE_SSL = False

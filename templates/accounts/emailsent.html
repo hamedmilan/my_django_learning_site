@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changing email</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static 'css/emailsent.css' %}">
+
+
+</head>
+
+<body>
+
+    <div class="thankyou-page">
+        <div class="_header">
+            <div class="logo">
+                <img src="https://codexcourier.com/images/banner-logo.png" alt="">
+            </div>
+            <h1></h1>
+        </div>
+        <div class="_body">
+            <div class="_box">
+                <h2>
+                    <strong>Please check your email</strong> for further instructions.
+                </h2>
+                <p>
+                    You will receive a link to change your password.
+                </p>
+            </div>
+        </div>
+        <div class="_footer">
+            <p>Wanna login with another user? <a href="{% url 'accounts:login' %}">here</a> </p>
+            <a class="btn" href="{% url 'website:index' %}">Back to homepage</a>
+        </div>
+    </div>
+
+    <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
+
+</body>
+
+</html>

@@ -94,9 +94,7 @@ def blog_search(request):
 
     return render(request, 'blog/blog-home.html', context)
 
-#def test_view(request):
-#
-#    return render(request, 'test.html')
+
 
 
 
