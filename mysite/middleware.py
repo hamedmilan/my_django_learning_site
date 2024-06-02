@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+
+"""
 class MyComingSoonMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
@@ -9,3 +11,4 @@ class MyComingSoonMiddleware:
 
         # Render the "Coming Soon" page for all other requests
         return render(request, 'comingsoon.html')
+"""

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'taggit',
     'django_summernote',
     'website.apps.WebsiteConfig',
+    'compressor',
 
     'blog',
     'accounts',
@@ -99,7 +100,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'mysite.middleware.MyComingSoonMiddleware',
+    #'mysite.middleware.MyComingSoonMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'

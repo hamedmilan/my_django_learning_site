@@ -66,18 +66,20 @@ def single_view(request, pid):
     else:
         previous_post = 0
         
-    
+    """
     if not the_post.login_required:
 
-        comments = Comment.objects.filter(post=the_post.id, approved=True)
 
-        form = CommenttForm()
-
-        context = {'post': the_post, 'next_post': next_post, 'previous_post': previous_post, 'comments': comments, 'form': form}
-
-        return render(request, 'blog/blog-single.html',context)
     else:
         return HttpResponseRedirect(reverse('accounts:login'))
+    """
+    comments = Comment.objects.filter(post=the_post.id, approved=True)
+
+    form = CommenttForm()
+
+    context = {'post': the_post, 'next_post': next_post, 'previous_post': previous_post, 'comments': comments, 'form': form}
+
+    return render(request, 'blog/blog-single.html',context)
 
 
 

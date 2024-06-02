@@ -15,8 +15,13 @@ typing_extensions
 webencodings
 django-multi-captcha-admin
 python-http-client
-
-
+django-compressor
+beautifulsoup4
+lxml
+html5lib
+calmjs.parse
+csscompressor
+brotli
 
 
 
